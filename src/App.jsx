@@ -1,14 +1,15 @@
-import Navbar from './components/Navbar.jsx'
-import Hero from './components/Hero.jsx'
-import About from './components/About.jsx'
-import Skills from './components/Skills.jsx'
-import Experience from './components/Experience.jsx'
-import Education from './components/Education.jsx'
-import Achievements from './components/Achievements.jsx'
-import Projects from './components/Projects.jsx'
-import Resume from './components/Resume.jsx'
-import Contact from './components/Contact.jsx'
-import Footer from './components/Footer.jsx'
+import Navbar from "./components/Navbar.jsx";
+import Hero from "./components/Hero.jsx";
+import About from "./components/About.jsx";
+import Skills from "./components/Skills.jsx";
+import Experience from "./components/Experience.jsx";
+import Education from "./components/Education.jsx";
+import Achievements from "./components/Achievements.jsx";
+import Projects from "./components/Projects.jsx";
+import Resume from "./components/Resume.jsx";
+import Contact from "./components/Contact.jsx";
+import Footer from "./components/Footer.jsx";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -25,9 +26,10 @@ function App() {
         <Resume />
         <Contact />
       </main>
+      <Toaster position="bottom-center" />
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

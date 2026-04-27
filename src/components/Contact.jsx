@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import emailjs from 'emailjs-com';
+import toast from "react-hot-toast";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -18,10 +20,40 @@ function Contact() {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission - could integrate with email service
-    const mailtoLink = `mailto:arshapanicker5622@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`
-    window.location.href = mailtoLink
+    e.preventDefault();
+    const toastId = toast.loading("Sending...");
+    emailjs.send(
+      'service_i0ugvtq',
+      'template_18jz7cu',// user template
+      {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      },
+      'BksbZoEleCFhgttAD'
+    )
+    emailjs.send(
+    'service_i0ugvtq',
+    'template_ijm73m5', // autoreply template
+     {
+      name: formData.name,
+      email: formData.email,
+    },
+    'BksbZoEleCFhgttAD'
+  )
+    .then((result) => {
+      toast.success("Message sent successfully! 🚀", { id: toastId });
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    })
+    .catch((error) => {
+      toast.error("Failed to send message ❌", { id: toastId });
+    });
   }
 
   return (
